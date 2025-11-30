@@ -2,22 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class MateriFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'urutan' => fake()->numberBetween(1, 10),
+            'judul' => fake()->sentence(4),
+            'status' => fake()->randomElement(['pending', 'diterima', 'ditolak', 'dinonaktifkan']),
+            'kelasId' => Kelas::factory(),
         ];
     }
 }

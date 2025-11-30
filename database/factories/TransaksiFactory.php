@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelas;
+use App\Models\Keranjang;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class TransaksiFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'bukti_transaksi' => 'bukti/' . fake()->uuid() . '.jpg',
+            'status' => fake()->randomElement(['pending', 'diterima', 'ditolak']),
+            'kelasId' => Kelas::factory(),
+            // Awas: Logic ini membuat keranjang baru setiap transaksi dibuat.
+            // Idealnya ambil id keranjang yang sesuai dengan user jika ada logic bisnis tertentu.
+            'keranjangId' => Keranjang::factory(), 
         ];
     }
 }
